@@ -1,73 +1,127 @@
-# React + TypeScript + Vite
+# Portfolio Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Modern, animated portfolio website built with React, TypeScript, Vite, Tailwind CSS, and Framer Motion.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Animated Hero Section** - Pulsing avatar, gradient text, rotating decorative elements
+- **About Section** - Personal introduction with hover effects
+- **Tech Stack Section** - Categorized skills with interactive cards
+- **Contact Form** - EmailJS integration for direct messages
+- **Scroll Progress Bar** - Visual indicator of page scroll
+- **Animated Background** - Floating particles and gradient orbs
+- **Social Links** - GitHub, LinkedIn, Email
+- **Fully Responsive** - Works on all devices
+- **Modern Animations** - Framer Motion powered interactions
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React 19** - UI library
+- **TypeScript** - Type safety
+- **Vite** - Build tool
+- **Tailwind CSS** - Styling
+- **Framer Motion** - Animations
+- **EmailJS** - Contact form functionality
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. Clone the repository:
+```bash
+git clone https://github.com/konradxmalinowski/portfolio.git
+cd portfolio
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. Install dependencies:
+```bash
+npm install
 ```
+
+3. Setup EmailJS (optional, for contact form):
+   - Follow instructions in `EMAILJS_SETUP.md`
+   - Update credentials in `src/components/Contact.tsx`
+
+4. Run development server:
+```bash
+npm run dev
+```
+
+5. Open [http://localhost:5173](http://localhost:5173)
+
+## Build for Production
+
+```bash
+npm run build
+```
+
+## Deploy to GitHub Pages
+
+1. Update `base` in `vite.config.ts`:
+   ```typescript
+   base: '/your-repo-name/',  // Change to your repository name
+   ```
+
+2. Build and deploy:
+   ```bash
+   npm run build
+   npm run deploy
+   ```
+
+Your site will be live at `https://yourusername.github.io/your-repo-name/`
+
+## Customization
+
+### Update Personal Information
+
+**Hero Section** (`src/components/Hero.tsx`):
+- Change name and initials
+- Update social media links (GitHub, LinkedIn, Email)
+
+**About Section** (`src/components/About.tsx`):
+- Edit personal description
+
+**Skills Section** (`src/components/Skills.tsx`):
+- Modify skill categories and technologies
+
+**Contact Section** (`src/components/Contact.tsx`):
+- Update email address
+- Configure EmailJS credentials
+
+### Styling
+
+All colors and styles can be customized in:
+- `tailwind.config.ts` - Global theme configuration
+- Individual component files - Component-specific styles
+
+## Project Structure
+
+```
+portfolio/
+├── src/
+│   ├── components/
+│   │   ├── AnimatedBackground.tsx  # Background animations
+│   │   ├── ScrollProgress.tsx      # Scroll indicator
+│   │   ├── Hero.tsx                # Landing section
+│   │   ├── About.tsx               # About me section
+│   │   ├── Skills.tsx              # Tech stack section
+│   │   └── Contact.tsx             # Contact form
+│   ├── App.tsx                     # Main app component
+│   ├── main.tsx                    # Entry point
+│   └── index.css                   # Global styles
+├── public/
+├── index.html
+├── vite.config.ts
+├── tailwind.config.ts
+├── tsconfig.json
+└── package.json
+```
+
+## License
+
+MIT
+
+## Contact
+
+Konrad Malinowski
+- Email: malinowski.konrad45@gmail.com
+- GitHub: [@konradxmalinowski](https://github.com/konradxmalinowski)
+- LinkedIn: [konrad-malinowski](https://linkedin.com/in/konradxmalinowski)
