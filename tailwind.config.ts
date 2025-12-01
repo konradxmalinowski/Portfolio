@@ -7,7 +7,7 @@ export default {
   ],
   theme: {
     extend: {
-      // Add your custom colors, fonts, animations etc.
+      
     },
   },
   plugins: [],

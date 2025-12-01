@@ -107,7 +107,6 @@ const Experience = () => {
     const top = Math.max(0, firstRect.top - containerRect.top - PAD)
     const bottom = Math.max(0, lastRect.bottom - containerRect.top + PAD)
     const height = Math.max(0, bottom - top)
-    // compute average center of the left timeline column across all timeline items
     let left: number | undefined = undefined
     try {
       const nodes = containerRef.current.querySelectorAll('[data-timeline-item]')
@@ -125,20 +124,16 @@ const Experience = () => {
         left = Math.round(sum / centers.length)
       }
     } catch (e) {
-      // ignore
     }
 
-    // if we can read the actual first dot center, prefer it (most accurate)
     try {
       if (firstDotRef && firstDotRef.current) {
         const dotRect = firstDotRef.current.getBoundingClientRect()
         left = Math.round(dotRect.left - containerRect.left + dotRect.width / 2)
       }
     } catch (e) {
-      // ignore
     }
 
-    // fallback to container padding + 24px if measurement fails
     if (left == null) {
       try {
         const cs = window.getComputedStyle(containerRef.current)
@@ -149,8 +144,7 @@ const Experience = () => {
       }
     }
 
-    // small horizontal nudge to align visually with the circular dot (tweak if needed)
-    const HORIZONTAL_NUDGE = 4 // pixels; increase to move line right, decrease to move left
+    const HORIZONTAL_NUDGE = 4 
     left = left + HORIZONTAL_NUDGE
 
     setLineStyle({ top, height, left })
@@ -181,7 +175,6 @@ const Experience = () => {
             <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-12">{t('experience.title')}</h2>
 
             <motion.div variants={containerVariants} initial="hidden" animate={isInView ? 'visible' : 'hidden'} className="space-y-8 relative">
-              {/* vertical timeline line (left column) - positioned based on first/last dot */}
               <div
                 className="hidden md:block absolute w-0.5 bg-gradient-to-b from-blue-500 via-blue-600 to-transparent"
                 style={
@@ -200,14 +193,12 @@ const Experience = () => {
 
                   return (
                     <div key={index} data-timeline-item className="md:grid md:grid-cols-[48px_1fr] md:gap-6" role="listitem">
-                      {/* timeline column */}
                         <div className="hidden md:flex items-start justify-center">
                           <div className="mt-8">
                             <span ref={index === 0 ? firstDotRef : undefined} className="block w-4 h-4 bg-white rounded-full border-2 border-blue-400/70 shadow-sm relative z-50" />
                           </div>
                         </div>
 
-                      {/* content column */}
                       <motion.div
                         variants={itemVariants}
                         whileHover={{ scale: 1.02, x: 10 }}

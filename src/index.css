@@ -7,33 +7,28 @@
   padding: 0;
   box-sizing: border-box;
 }
-/* Theme variables for gradient tuning */
 :root{
-  --g-blue: #06132a; /* deep navy blue */
-  --g-purple: #1b1330; /* deep muted purple */
+  --g-blue: #06132a;
+  --g-purple: #1b1330;
 }
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  /* Global continuous gradient spanning the entire document height */
   background-image: linear-gradient(180deg, var(--g-blue) 0%, var(--g-blue) 85%, var(--g-purple) 100%);
   background-repeat: no-repeat;
-  background-attachment: scroll; /* scrolls with content */
-  background-size: 100% 100%; /* stretch across whole document height */
-  transition: background 400ms ease; /* small transition for smoother theme tweaks */
+  background-attachment: scroll;
+  background-size: 100% 100%;
+  transition: background 400ms ease;
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-/* Animated blended background used by `AnimatedBackground` component */
 .animated-bg {
   position: absolute;
-  /* extend slightly beyond container but keep subtle */
   inset: -12%;
   pointer-events: none;
   background-repeat: no-repeat;
@@ -47,7 +42,6 @@ html {
   opacity: 0.88;
 }
 
-/* Very subtle noise overlay to reduce banding */
 .animated-bg::after {
   content: '';
   position: absolute;
@@ -58,7 +52,6 @@ html {
   mix-blend-mode: overlay;
 }
 
-/* Ensure document fills viewport to avoid partial gradient rendering */
 html, body { min-height: 100vh; }
 
 @media (prefers-reduced-motion: reduce) {

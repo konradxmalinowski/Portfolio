@@ -12,12 +12,10 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 const translations = {
   en: {
-    // Hero
     'hero.greeting': "Hello, I'm",
     'hero.role': 'Full Stack Developer',
     'hero.cta': 'Get In Touch',
 
-    // About
     'about.title': 'About Me',
     'about.p1': "I'm a high school student who's already developing as a",
     'about.p1.bold': 'full-stack developer',
@@ -29,7 +27,6 @@ const translations = {
     'about.p3.bold': 'AI',
     'about.p3.rest': 'as a tool to speed up workflows, enhance creativity, and open the door to more innovative solutions.',
 
-    // Services
     'services.title': 'Services',
     'services.subtitle': 'Professional web development solutions tailored to your needs',
 
@@ -75,18 +72,15 @@ const translations = {
     'service.database.f3': 'Data Migrations',
     'service.database.f4': 'Performance Tuning',
 
-    // Experience
     'experience.title': 'Experience',
     'experience.current': 'Current',
 
-    // Skills
     'skills.title': 'Tech Stack',
     'skills.frontend': 'Frontend',
     'skills.backend': 'Backend',
     'skills.databases': 'Databases',
     'skills.tools': 'Tools & Other',
 
-    // Contact
     'contact.title': 'Get In Touch',
     'contact.subtitle': "Have a project in mind? Let's work together to bring your ideas to life",
     'contact.info.title': 'Contact Information',
@@ -109,12 +103,10 @@ const translations = {
     'contact.form.error': 'Failed to send message. Please try again or email me directly.',
   },
   pl: {
-    // Hero
     'hero.greeting': 'Hej, jestem',
     'hero.role': 'Full Stack Developer',
     'hero.cta': 'Skontaktuj się',
 
-    // About
     'about.title': 'O mnie',
     'about.p1': 'Jestem uczniem liceum, który już teraz rozwija się jako',
     'about.p1.bold': 'full-stack developer',
@@ -126,7 +118,6 @@ const translations = {
     'about.p3.bold': 'AI',
     'about.p3.rest': 'jako narzędzie do przyspieszania procesów, wzmacniania kreatywności i otwierania drzwi do bardziej innowacyjnych rozwiązań.',
 
-    // Services
     'services.title': 'Usługi',
     'services.subtitle': 'Profesjonalne rozwiązania web development dostosowane do Twoich potrzeb',
 
@@ -172,18 +163,15 @@ const translations = {
     'service.database.f3': 'Migracje Danych',
     'service.database.f4': 'Tuning Wydajności',
 
-    // Experience
     'experience.title': 'Doświadczenie',
     'experience.current': 'Obecnie',
 
-    // Skills
     'skills.title': 'Stack Technologiczny',
     'skills.frontend': 'Frontend',
     'skills.backend': 'Backend',
     'skills.databases': 'Bazy Danych',
     'skills.tools': 'Narzędzia i Inne',
 
-    // Contact
     'contact.title': 'Skontaktuj się',
     'contact.subtitle': 'Masz projekt na myśli? Pracujmy razem, aby wcielić Twoje pomysły w życie',
     'contact.info.title': 'Informacje Kontaktowe',
@@ -207,7 +195,6 @@ const translations = {
   }
 }
 
-// Detect browser language
 const getBrowserLanguage = (): Language => {
   const browserLang = navigator.language.toLowerCase()
   if (browserLang.startsWith('pl')) return 'pl'
@@ -216,13 +203,11 @@ const getBrowserLanguage = (): Language => {
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLanguageState] = useState<Language>(() => {
-    // Check localStorage first, then browser language
     const savedLang = localStorage.getItem('language') as Language | null
     return savedLang || getBrowserLanguage()
   })
 
   useEffect(() => {
-    // Save to localStorage when language changes
     localStorage.setItem('language', language)
   }, [language])
 

@@ -17,16 +17,11 @@ const Contact = () => {
     setSubmitStatus('idle')
 
     try {
-      // 📧 EmailJS Configuration
-      // Follow the setup guide in EMAILJS_SETUP.md to get your credentials
-      // 1. Create account at https://www.emailjs.com/
-      // 2. Get your Service ID, Template ID, and Public Key
-      // 3. Replace the values below:
       await emailjs.sendForm(
-        'YOUR_SERVICE_ID',     // From Email Services → Copy Service ID
-        'YOUR_TEMPLATE_ID',    // From Email Templates → Copy Template ID
+        'YOUR_SERVICE_ID',
+        'YOUR_TEMPLATE_ID',
         formRef.current!,
-        'YOUR_PUBLIC_KEY'      // From Account → General → Copy Public Key
+        'YOUR_PUBLIC_KEY'
       )
 
       setSubmitStatus('success')
@@ -90,14 +85,12 @@ const Contact = () => {
           </p>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Left side - Contact Info */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="space-y-6"
             >
-              {/* Contact Methods */}
               <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 md:p-8 border border-white/10 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300">
                 <h3 className="text-2xl font-bold text-white mb-6">{t('contact.info.title')}</h3>
                 <div className="space-y-4">
@@ -123,7 +116,6 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* Availability */}
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 className="bg-gradient-to-br from-blue-600/20 to-cyan-600/20 backdrop-blur-lg rounded-2xl p-6 border border-blue-500/30 hover:border-blue-500/50 transition-all duration-300"
@@ -143,7 +135,6 @@ const Contact = () => {
                 </div>
               </motion.div>
 
-              {/* Location */}
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/10 hover:border-blue-500/50 transition-all duration-300"
@@ -163,7 +154,6 @@ const Contact = () => {
               </motion.div>
             </motion.div>
 
-            {/* Right side - Contact Form */}
             <motion.form
               ref={formRef}
               onSubmit={handleSubmit}

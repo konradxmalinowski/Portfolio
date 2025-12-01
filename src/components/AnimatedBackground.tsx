@@ -9,9 +9,8 @@ const AnimatedBackground = () => {
 
     const update = () => {
       if (containerRef.current && bgRef.current) {
-        // subtle parallax: move background a small fraction of page scroll
         const scrollY = window.scrollY || window.pageYOffset
-        const offset = scrollY * 0.06 // fractional (no rounding) to avoid stepped jumps
+        const offset = scrollY * 0.06
         bgRef.current.style.transform = `translateY(${offset}px) translateZ(0)`
       }
       rafId = requestAnimationFrame(update)
@@ -26,7 +25,6 @@ const AnimatedBackground = () => {
 
   return (
     <div ref={containerRef} className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-      {/* Single blended animated background that scrolls with the page (parallax) */}
       <div ref={bgRef} className="animated-bg" aria-hidden />
     </div>
   )

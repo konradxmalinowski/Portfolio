@@ -67,7 +67,7 @@ const Hero = () => {
           aria-label="Navigate to contact section"
         >
           {t('hero.cta')}
-        </motion.a>          {/* Social Links */}
+        </motion.a>
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -134,7 +134,6 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      {/* Decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
           animate={{

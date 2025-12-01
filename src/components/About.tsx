@@ -29,7 +29,6 @@ const About = () => {
           </h2>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8" role="list" aria-label="Professional statistics">
-            {/* Stats Cards */}
             {stats.map((stat, index) => (
               <motion.div
                 key={index}
@@ -54,7 +53,6 @@ const About = () => {
             className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 md:p-12 border border-white/10 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300"
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-              {/* Left side - Image/Visual */}
               <motion.div
                 whileHover={{ scale: 1.05, rotate: 2 }}
                 transition={{ type: "spring", stiffness: 300 }}
@@ -85,7 +83,6 @@ const About = () => {
                 />
               </motion.div>
 
-              {/* Right side - Text */}
               <div className="space-y-6 text-left">
                 <p className="text-lg md:text-xl text-white/90 leading-relaxed">
                   {t('about.p1')} <strong className="text-blue-400 font-bold">{t('about.p1.bold')}</strong> {t('about.p1.rest')}
@@ -99,7 +96,6 @@ const About = () => {
                   {t('about.p3')} <strong className="text-blue-400 font-bold">{t('about.p3.bold')}</strong> {t('about.p3.rest')}
                 </p>
 
-                {/* Key highlights */}
                 <div className="grid grid-cols-2 gap-4 pt-4">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-blue-600/20 rounded-lg flex items-center justify-center text-xl">🎯</div>
