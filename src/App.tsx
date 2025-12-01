@@ -7,6 +7,7 @@ import Contact from './components/Contact'
 import AnimatedBackground from './components/AnimatedBackground'
 import ScrollProgress from './components/ScrollProgress'
 import LanguageSwitcher from './components/LanguageSwitcher'
+import Footer from './components/Footer'
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Skills />
         <Contact />
       </div>
+      <Footer />
     </>
   )
 }
