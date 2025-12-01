@@ -19,7 +19,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
   /* Global continuous gradient spanning the entire document height */
-  background-image: linear-gradient(180deg, var(--g-blue) 0%, var(--g-blue) 50%, var(--g-purple) 100%);
+  background-image: linear-gradient(180deg, var(--g-blue) 0%, var(--g-blue) 85%, var(--g-purple) 100%);
   background-repeat: no-repeat;
   background-attachment: scroll; /* scrolls with content */
   background-size: 100% 100%; /* stretch across whole document height */
