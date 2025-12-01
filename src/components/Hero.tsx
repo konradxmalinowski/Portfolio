@@ -6,8 +6,8 @@ const Hero = () => {
   const { t } = useLanguage()
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-transparent relative overflow-hidden">
-      <div className="container mx-auto px-6 text-center relative z-10">
+    <section className="min-h-[100dvh] flex items-center justify-center bg-transparent relative overflow-hidden">
+      <div className="w-full max-w-6xl mx-auto px-6 py-0 md:py-8 text-center relative z-10 transform translate-y-6 md:translate-y-0">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
