@@ -90,7 +90,7 @@ const Services = () => {
   }
 
   return (
-    <section id="services" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 py-20 relative">
+    <section id="services" className="min-h-screen flex items-center justify-center bg-transparent py-20 relative">
       <div className="container mx-auto px-6">
         <motion.div
           ref={ref}

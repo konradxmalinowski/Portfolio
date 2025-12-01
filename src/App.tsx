@@ -12,9 +12,9 @@ function App() {
   return (
     <>
       <ScrollProgress />
-      <AnimatedBackground />
       <LanguageSwitcher />
       <div className="min-h-screen relative">
+        <AnimatedBackground />
         <Hero />
         <About />
         <Services />
