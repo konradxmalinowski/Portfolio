@@ -1,0 +1,6 @@
+# Robots.txt for Portfolio
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://konradxmalinowski.github.io/Portfolio/sitemap.xml
