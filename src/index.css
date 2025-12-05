@@ -20,6 +20,9 @@ body {
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-size: 100% 100%;
+  -webkit-transition: background 400ms ease;
+  -moz-transition: background 400ms ease;
+  -o-transition: background 400ms ease;
   transition: background 400ms ease;
 }
 
@@ -36,8 +39,19 @@ html {
                     radial-gradient(800px circle at 82% 70%, rgba(25,20,45,0.05) 0%, rgba(25,20,45,0.02) 35%, transparent 65%);
   background-size: 150% 150%;
   background-position: center;
+  -webkit-filter: blur(40px) saturate(100%);
   filter: blur(40px) saturate(100%);
-  will-change: transform, opacity, filter;
+  will-change: transform;
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000px;
+  -moz-perspective: 1000px;
+  perspective: 1000px;
   mix-blend-mode: overlay;
   opacity: 0.88;
 }
@@ -55,11 +69,21 @@ html {
 html, body { min-height: 100vh; }
 
 @media (prefers-reduced-motion: reduce) {
-  .animated-bg,
-  .animated-bg::before,
-  .animated-bg::after {
-    animation: none !important;
-    transition: none !important;
+  *,
+  *::before,
+  *::after {
+    -webkit-animation-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    -webkit-animation-iteration-count: 1 !important;
+    animation-iteration-count: 1 !important;
+    -webkit-transition-duration: 0.01ms !important;
+    -o-transition-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animated-bg {
+    -webkit-filter: blur(32px);
     filter: blur(32px);
   }
 }
