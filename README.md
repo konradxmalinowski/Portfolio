@@ -146,8 +146,11 @@ portfolio/
 │   ├── main.tsx                      # Application entry point
 │   └── index.css                     # Global styles
 ├── public/
-│   └── vite.svg                      # Default favicon
-├── dist/                             # Production build output
+│   ├── vite.svg                      # Favicon
+│   ├── robots.txt                    # SEO crawler instructions
+│   ├── sitemap.xml                   # SEO sitemap
+│   └── google*.html                  # Google Search Console verification
+├── dist/                             # Production build output (gitignored)
 ├── index.html                        # HTML entry point
 ├── vite.config.ts                    # Vite configuration
 ├── tailwind.config.ts                # Tailwind theme config
