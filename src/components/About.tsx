@@ -9,9 +9,9 @@ const About = () => {
   const { t } = useLanguage()
 
   const stats = [
-    { label: t('stats.experience'), value: '2+', icon: '📅' },
-    { label: t('stats.technologies'), value: '20+', icon: '💻' },
-    { label: t('stats.integrations'), value: '5+', icon: '⚡' }
+    { label: t('stats.experience'), value: '2+', icon: '📅', iconLabel: 'Calendar' },
+    { label: t('stats.technologies'), value: '20+', icon: '💻', iconLabel: 'Computer' },
+    { label: t('stats.integrations'), value: '5+', icon: '⚡', iconLabel: 'Lightning bolt' }
   ]
 
   return (
@@ -39,7 +39,7 @@ const About = () => {
                 className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 text-center border border-white/10 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300"
                 role="listitem"
               >
-                <div className="text-4xl mb-3">{stat.icon}</div>
+                <div className="text-4xl mb-3" role="img" aria-label={stat.iconLabel}>{stat.icon}</div>
                 <div className="text-3xl md:text-4xl font-bold text-white mb-2">{stat.value}</div>
                 <div className="text-white/60 text-sm">{stat.label}</div>
               </motion.div>
@@ -72,6 +72,7 @@ const About = () => {
                   }}
                   transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                   className="absolute -top-4 -right-4 w-24 h-24 bg-blue-500/20 rounded-full blur-xl"
+                  aria-hidden="true"
                 />
                 <motion.div
                   animate={{
@@ -80,6 +81,7 @@ const About = () => {
                   }}
                   transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
                   className="absolute -bottom-4 -left-4 w-32 h-32 bg-cyan-500/20 rounded-full blur-xl"
+                  aria-hidden="true"
                 />
               </motion.div>
 
@@ -98,19 +100,19 @@ const About = () => {
 
                 <div className="grid grid-cols-2 gap-4 pt-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-blue-600/20 rounded-lg flex items-center justify-center text-xl">🎯</div>
+                    <div className="w-10 h-10 bg-blue-600/20 rounded-lg flex items-center justify-center text-xl" role="img" aria-label="Target">🎯</div>
                     <span className="text-white/80 text-sm">{t('features.passion')}</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-blue-600/20 rounded-lg flex items-center justify-center text-xl">🧠</div>
+                    <div className="w-10 h-10 bg-blue-600/20 rounded-lg flex items-center justify-center text-xl" role="img" aria-label="Brain">🧠</div>
                     <span className="text-white/80 text-sm">{t('features.selftaught')}</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-blue-600/20 rounded-lg flex items-center justify-center text-xl">🤖</div>
+                    <div className="w-10 h-10 bg-blue-600/20 rounded-lg flex items-center justify-center text-xl" role="img" aria-label="Robot">🤖</div>
                     <span className="text-white/80 text-sm">{t('features.ai')}</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-blue-600/20 rounded-lg flex items-center justify-center text-xl">⚡</div>
+                    <div className="w-10 h-10 bg-blue-600/20 rounded-lg flex items-center justify-center text-xl" role="img" aria-label="Lightning">⚡</div>
                     <span className="text-white/80 text-sm">{t('features.fastlearner')}</span>
                   </div>
                 </div>

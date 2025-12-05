@@ -12,16 +12,24 @@ import Footer from './components/Footer'
 function App() {
   return (
     <>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-blue-600 focus:text-white focus:top-4 focus:left-4 focus:rounded-lg focus:shadow-lg"
+      >
+        Skip to main content
+      </a>
       <ScrollProgress />
       <LanguageSwitcher />
       <div className="min-h-screen relative">
         <AnimatedBackground />
-        <Hero />
-        <About />
-        <Services />
-        <Experience />
-        <Skills />
-        <Contact />
+        <main id="main-content">
+          <Hero />
+          <About />
+          <Services />
+          <Experience />
+          <Skills />
+          <Contact />
+        </main>
       </div>
       <Footer />
     </>
