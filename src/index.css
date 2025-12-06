@@ -24,6 +24,7 @@ body {
   -moz-transition: background 400ms ease;
   -o-transition: background 400ms ease;
   transition: background 400ms ease;
+  overflow-x: hidden;
 }
 
 html {
