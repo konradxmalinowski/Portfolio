@@ -71,9 +71,8 @@ const Services = () => {
   ]
 
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: {},
     visible: {
-      opacity: 1,
       transition: {
         staggerChildren: 0.1,
       },
@@ -81,9 +80,8 @@ const Services = () => {
   }
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { y: 30 },
     visible: {
-      opacity: 1,
       y: 0,
       transition: { duration: 0.5 },
     },
@@ -94,8 +92,8 @@ const Services = () => {
       <div className="container mx-auto px-6">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          initial={{ y: 50 }}
+          animate={isInView ? { y: 0 } : {}}
           transition={{ duration: 0.8 }}
           className="max-w-7xl mx-auto"
         >

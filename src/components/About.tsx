@@ -20,8 +20,8 @@ const About = () => {
       <div className="container mx-auto px-6">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          initial={{ y: 50 }}
+          animate={isInView ? { y: 0 } : {}}
           transition={{ duration: 0.8 }}
           className="max-w-6xl mx-auto"
         >
@@ -33,8 +33,8 @@ const About = () => {
             {stats.map((stat, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                initial={{ y: 20 }}
+                animate={isInView ? { y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
                 whileHover={{ scale: 1.05, y: -5 }}
                 className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 text-center border border-white/10 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300"
@@ -48,8 +48,8 @@ const About = () => {
           </div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            initial={{ y: 20 }}
+            animate={isInView ? { y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.5 }}
             className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 md:p-12 border border-white/10 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300"
           >

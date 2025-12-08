@@ -46,9 +46,8 @@ const Experience = () => {
   ]
 
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: {},
     visible: {
-      opacity: 1,
       transition: {
         staggerChildren: 0.2,
       },
@@ -56,9 +55,8 @@ const Experience = () => {
   }
 
   const itemVariants = {
-    hidden: { opacity: 0, x: -50 },
+    hidden: { x: -50 },
     visible: {
-      opacity: 1,
       x: 0,
       transition: { duration: 0.6 },
     },
@@ -111,8 +109,8 @@ const Experience = () => {
       <div className="container mx-auto px-6">
         <div ref={ref}>
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            initial={{ y: 50 }}
+            animate={isInView ? { y: 0 } : {}}
             transition={{ duration: 0.8 }}
             className="max-w-5xl mx-auto relative z-10"
           >

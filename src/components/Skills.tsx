@@ -27,9 +27,8 @@ const Skills = () => {
   ]
 
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: {},
     visible: {
-      opacity: 1,
       transition: {
         staggerChildren: 0.15,
       },
@@ -37,9 +36,8 @@ const Skills = () => {
   }
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { y: 20 },
     visible: {
-      opacity: 1,
       y: 0,
       transition: { duration: 0.5 },
     },
@@ -50,8 +48,8 @@ const Skills = () => {
       <div className="container mx-auto px-6">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          initial={{ y: 50 }}
+          animate={isInView ? { y: 0 } : {}}
           transition={{ duration: 0.8 }}
           className="max-w-6xl mx-auto"
         >
