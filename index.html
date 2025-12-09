@@ -24,10 +24,116 @@
     <meta property="twitter:description" content="Portfolio of Konrad Malinowski - Full-Stack Web Developer specializing in React, Node.js, and PHP. Discover my projects, technical skills, professional experience, certifications, and awards in modern web development." />
     <meta property="twitter:image" content="https://konradxmalinowski.github.io/Portfolio/og-image.jpg" />
 
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+          'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background-image: linear-gradient(180deg, #06132a 0%, #06132a 85%, #1b1330 100%);
+        background-attachment: scroll;
+        color: #ffffff;
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+
+      #root {
+        width: 100%;
+        min-height: 100vh;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button {
+        cursor: pointer;
+        border: none;
+        background: none;
+        font: inherit;
+      }
+
+      .animate-skeleton {
+        animation: shimmer 2s infinite;
+        background-size: 200% 100%;
+      }
+
+      @keyframes shimmer {
+        0% {
+          background-position: 200% 0;
+        }
+        100% {
+          background-position: -200% 0;
+        }
+      }
+
+      .skeleton-text {
+        height: 1rem;
+        background: linear-gradient(90deg, rgba(255,255,255,0.1) 25%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 75%);
+        border-radius: 0.375rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .skeleton-rect {
+        background: linear-gradient(90deg, rgba(255,255,255,0.1) 25%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 75%);
+        border-radius: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      section {
+        min-height: auto;
+      }
+
+      .transition-all {
+        transition: all 0.3s ease-in-out;
+      }
+    </style>
+
     <script type="module" src="/src/main.tsx"></script>
   </head>
   <body>
-    <div id="root"></div>
+    <noscript>
+      <div style="
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background-image: linear-gradient(180deg, #06132a 0%, #06132a 85%, #1b1330 100%);
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        color: #ffffff;
+      ">
+        <div style="text-align: center;">
+          <h1 style="font-size: 24px; margin-bottom: 10px;">JavaScript Required</h1>
+          <p style="color: rgba(255,255,255,0.7);">This application requires JavaScript to be enabled. Please enable it in your browser settings.</p>
+        </div>
+      </div>
+    </noscript>
+
+    <div id="root">
+      <div class="app-loading">
+        <div class="app-loading-content">
+          <div class="app-loading-spinner"></div>
+        </div>
+      </div>
+    </div>
 
   </body>
 </html>
