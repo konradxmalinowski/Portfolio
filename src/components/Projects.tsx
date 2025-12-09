@@ -24,7 +24,6 @@ const Projects = () => {
       period: t('projects.portfolio.period'),
       description: t('projects.portfolio.desc'),
       technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Vite', 'EmailJS', 'Responsive Design', 'Git'],
-      fullWidth: true,
     },
     {
       title: 'StudyLodz',
@@ -37,6 +36,12 @@ const Projects = () => {
       period: t('projects.hangman.period'),
       description: t('projects.hangman.desc'),
       technologies: ['Spring Boot', 'Angular', 'MySQL', 'TypeScript', 'Java', 'JavaScript', 'REST APIs', 'Docker', 'Git'],
+    },
+    {
+      title: t('projects.zse.title'),
+      period: t('projects.zse.period'),
+      description: t('projects.zse.desc'),
+      technologies: ['WordPress', 'PHP', 'MySQL', 'HTML', 'CSS', 'JavaScript', 'SEO', 'Performance Optimization'],
     },
   ]
 
@@ -89,7 +94,7 @@ const Projects = () => {
                   variants={itemVariants}
                   whileHover={{ scale: 1.03, y: -5 }}
                   transition={{ type: 'spring', stiffness: 300 }}
-                  className={`bg-white/10 backdrop-blur-lg rounded-2xl p-7 border border-white/10 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300 ${project.fullWidth ? 'md:col-span-2' : ''}`}
+                  className="bg-white/10 backdrop-blur-lg rounded-2xl p-7 border border-white/10 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300"
                   role="listitem"
                 >
                   <div className="flex flex-col h-full">
@@ -103,9 +108,10 @@ const Projects = () => {
                       </div>
                     </div>
 
-                    <p className="text-white/80 leading-relaxed mb-4 flex-grow text-base">
-                      {project.description}
-                    </p>
+                    <p
+                      className="text-white/80 leading-relaxed mb-4 flex-grow text-base"
+                      dangerouslySetInnerHTML={{ __html: project.description }}
+                    />
 
                     <div className="flex flex-wrap gap-2.5" role="list" aria-label="Technologies used">
                       {project.technologies.map((tech, idx) => (
