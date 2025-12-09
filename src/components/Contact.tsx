@@ -140,11 +140,11 @@ const Contact = () => {
               initial={{ x: -50 }}
               animate={isInView ? { x: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="space-y-6"
+              className="space-y-5 flex flex-col h-full"
             >
-              <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 md:p-8 border border-white/10 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300">
-                <h3 className="text-2xl font-bold text-white mb-6">{t('contact.info.title')}</h3>
-                <div className="space-y-4">
+              <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 md:p-8 border border-white/10 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300 flex-grow">
+                <h3 className="text-2xl font-bold text-white mb-4">{t('contact.info.title')}</h3>
+                <div className="space-y-3">
                   {contactMethods.map((method, index) => (
                     <motion.a
                       key={index}
@@ -169,7 +169,7 @@ const Contact = () => {
 
               <motion.div
                 whileHover={{ scale: 1.02 }}
-                className="bg-gradient-to-br from-blue-600/20 to-cyan-600/20 backdrop-blur-lg rounded-2xl p-6 border border-blue-500/30 hover:border-blue-500/50 transition-all duration-300"
+                className="bg-gradient-to-br from-blue-600/20 to-cyan-600/20 backdrop-blur-lg rounded-2xl p-5 border border-blue-500/30 hover:border-blue-500/50 transition-all duration-300"
               >
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -188,7 +188,7 @@ const Contact = () => {
 
               <motion.div
                 whileHover={{ scale: 1.02 }}
-                className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/10 hover:border-blue-500/50 transition-all duration-300"
+                className="bg-white/10 backdrop-blur-lg rounded-2xl p-5 border border-white/10 hover:border-blue-500/50 transition-all duration-300"
               >
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-blue-600/20 rounded-lg flex items-center justify-center">
@@ -211,11 +211,11 @@ const Contact = () => {
               initial={{ x: 50 }}
               animate={isInView ? { x: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 md:p-8 space-y-6 border border-white/10 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300"
+              className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 md:p-8 space-y-5 border border-white/10 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300 h-full flex flex-col"
               aria-label="Contact form"
               style={{ scrollMarginTop: '100px' }}
             >
-              <h3 className="text-2xl font-bold text-white mb-6">{t('contact.form.title')}</h3>
+              <h3 className="text-2xl font-bold text-white mb-4">{t('contact.form.title')}</h3>
 
               <div>
                 <label htmlFor="name" className="block text-white font-semibold mb-2">
@@ -245,7 +245,7 @@ const Contact = () => {
                 />
               </div>
 
-              <div>
+              <div className="flex-grow flex flex-col">
                 <label htmlFor="message" className="block text-white font-semibold mb-2">
                   {t('contact.form.message')}
                 </label>
@@ -253,8 +253,8 @@ const Contact = () => {
                   id="message"
                   name="message"
                   required
-                  rows={6}
-                  className="w-full px-4 py-3 rounded-lg bg-white/20 text-white placeholder-white/60 border border-white/30 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
+                  rows={5}
+                  className="w-full flex-grow px-4 py-3 rounded-lg bg-white/20 text-white placeholder-white/60 border border-white/30 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
                   placeholder={t('contact.form.placeholder.message')}
                 />
               </div>
