@@ -8,6 +8,7 @@ import Projects from './components/Projects'
 import Contact from './components/Contact'
 import AnimatedBackground from './components/AnimatedBackground'
 import ScrollProgress from './components/ScrollProgress'
+import ScrollToTop from './components/ScrollToTop'
 import LanguageSwitcher from './components/LanguageSwitcher'
 import Footer from './components/Footer'
 
@@ -21,6 +22,7 @@ function App() {
         Skip to main content
       </a>
       <ScrollProgress />
+      <ScrollToTop />
       <LanguageSwitcher />
       <div className="min-h-screen relative">
         <AnimatedBackground />
