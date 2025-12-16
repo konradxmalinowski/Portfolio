@@ -143,7 +143,7 @@ export const translations = {
     },
     pl: {
         'hero.greeting': 'Hej, jestem',
-        'hero.role': 'Full Stack Developer',
+        'hero.role': 'Full Stack Developer | AI Engineer',
         'hero.cta': 'Skontaktuj się',
 
         'about.title': 'O mnie',
