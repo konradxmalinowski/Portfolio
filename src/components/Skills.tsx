@@ -44,6 +44,7 @@ const Skills = () => {
         { name: 'Express.js', icon: 'express', color: 'FFFFFF' },
         { name: 'Java', icon: 'openjdk', color: 'fff' },
         { name: 'Spring', icon: 'spring', color: '6DB33F' },
+        { name: 'Hibernate', icon: 'hibernate', color: '59666C' },
         { name: 'Python', icon: 'python', color: '3776AB' },
         { name: 'PHP', icon: 'php', color: '777BB4' },
         { name: '.NET', icon: 'dotnet', color: 'c78aff' },
@@ -58,7 +59,8 @@ const Skills = () => {
         { name: 'PostgreSQL', icon: 'postgresql', color: '4169E1' },
         { name: 'MariaDB', icon: 'mariadb', color: '003545' },
         { name: 'MS SQL Server', icon: 'mysql', color: '0078D4' },
-        { name: 'SQLite', icon: 'sqlite', color: '003B57' }
+        { name: 'SQLite', icon: 'sqlite', color: '003B57' },
+        { name: 'Redis', icon: 'redis', color: 'DC382D' }
       ] as Skill[]
     },
     {
@@ -78,7 +80,7 @@ const Skills = () => {
         { name: 'Figma', icon: 'figma', color: 'F24E1E' },
         { name: 'Bash', icon: 'gnubash', color: '4EAA25' },
         { name: 'WordPress', icon: 'wordpress', color: '21759B' },
-        { name: 'Twilio', icon: 'twilio', color: 'F22F46' }
+        { name: 'Twilio', icon: 'https://www.vectorlogo.zone/logos/twilio/twilio-icon.svg', color: '' }
       ] as Skill[]
     }
   ]
@@ -157,7 +159,7 @@ const Skills = () => {
                         <img
                           alt={skill.name}
                           className="w-6 h-6"
-                          src={`https://cdn.simpleicons.org/${skill.icon}/${skill.color}`}
+                          src={skill.icon.startsWith('http') ? skill.icon : `https://cdn.simpleicons.org/${skill.icon}/${skill.color}`}
                           loading="lazy"
                         />
                         <span className="text-white text-base font-medium">
