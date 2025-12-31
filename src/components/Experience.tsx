@@ -81,7 +81,7 @@ const Experience = () => {
   const computeDuration = (start: Date | null, end: Date | null) => {
     if (!start) return ''
     const to = end || currentTime
-    let months = (to.getFullYear() - start.getFullYear()) * 12 + (to.getMonth() - start.getMonth())
+    let months = (to.getFullYear() - start.getFullYear()) * 12 + (to.getMonth() - start.getMonth()) + 1
     if (months < 1) return t('experience.lessThanMonth')
     const years = Math.floor(months / 12)
     const remMonths = months % 12
