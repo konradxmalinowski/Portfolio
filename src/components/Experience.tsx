@@ -1,7 +1,6 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
 import { useLanguage } from '../contexts/LanguageContext'
-import Skeleton from './Skeleton'
 
 type ExperienceItem = {
   company: string
@@ -10,7 +9,7 @@ type ExperienceItem = {
   start: string | null
   end: string | null
   location: string
-  description: string
+  bullets: string[]
   skills: string[]
   current?: boolean
 }
@@ -20,19 +19,39 @@ const Experience = () => {
   const isInView = useInView(ref, { once: true, amount: 0.2 })
   const { t } = useLanguage()
   const [currentTime, setCurrentTime] = useState(new Date())
-  const [isLoading, setIsLoading] = useState(true)
 
   const experiences: ExperienceItem[] = [
     {
       company: 'Aibron',
-      role: t('experience.aibron.role'),
+      role: t('experience.aibron.junior.role'),
+      type: t('experience.contract'),
+      start: '2026-01-01',
+      end: null,
+      location: t('experience.aibron.junior.location'),
+      bullets: [
+        t('experience.aibron.junior.desc.1'),
+        t('experience.aibron.junior.desc.2'),
+        t('experience.aibron.junior.desc.3'),
+        t('experience.aibron.junior.desc.4'),
+      ],
+      skills: ['JavaScript', 'Angular', 'Java', 'Spring Boot', 'RabbitMQ', 'REST APIs', 'Microservices', 'MySQL', 'Docker', 'Git'],
+      current: true,
+    },
+    {
+      company: 'Aibron',
+      role: t('experience.aibron.intern.role'),
       type: t('experience.internship'),
       start: '2025-08-01',
-      end: null,
-      location: t('experience.aibron.location'),
-      description: t('experience.aibron.desc'),
-      skills: ['JavaScript', 'Microservices', 'Angular', 'Java', 'Spring Boot', 'Enterprise Applications'],
-      current: true,
+      end: '2026-01-01',
+      location: t('experience.aibron.intern.location'),
+      bullets: [
+        t('experience.aibron.intern.desc.1'),
+        t('experience.aibron.intern.desc.2'),
+        t('experience.aibron.intern.desc.3'),
+        t('experience.aibron.intern.desc.4'),
+        t('experience.aibron.intern.desc.5'),
+      ],
+      skills: ['JavaScript', 'Java', 'Angular', 'Spring Boot', 'Microservices', 'Git', 'REST APIs'],
     },
     {
       company: t('experience.zse.company'),
@@ -41,28 +60,16 @@ const Experience = () => {
       start: '2023-05-01',
       end: null,
       location: t('experience.zse.location'),
-      description: t('experience.zse.desc'),
-      skills: ['Search Engine Optimization (SEO)', 'MySQL', 'WordPress', 'Web Design', 'Performance Optimization', 'Content Management'],
+      bullets: [
+        t('experience.zse.desc.1'),
+        t('experience.zse.desc.2'),
+        t('experience.zse.desc.3'),
+        t('experience.zse.desc.4'),
+      ],
+      skills: ['WordPress', 'MySQL', 'PHP', 'SEO', 'Web Design'],
       current: true,
     },
   ]
-
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { x: -50 },
-    visible: {
-      x: 0,
-      transition: { duration: 0.6 },
-    },
-  }
 
   const parseDate = (isoOrNull: string | null) => {
     if (!isoOrNull) return null
@@ -92,115 +99,98 @@ const Experience = () => {
   }
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 300)
-    return () => clearTimeout(timer)
-  }, [])
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTime(new Date())
-    }, 60000)
-
+    const interval = setInterval(() => setCurrentTime(new Date()), 60000)
     return () => clearInterval(interval)
   }, [])
 
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+  }
+
   return (
-    <section id="experience" className="min-h-screen flex items-center justify-center bg-transparent py-20 relative overflow-x-hidden" aria-label="Work experience section">
-      <div className="container mx-auto px-6">
-        <div ref={ref}>
-          <motion.div
-            initial={{ y: 50 }}
-            animate={isInView ? { y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="max-w-5xl mx-auto relative z-10"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-white text-center mb-12">{t('experience.title')}</h2>
+    <section id="experience" className="py-20" aria-label="Work experience">
+      <div className="max-w-4xl mx-auto px-6" ref={ref}>
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5 }}
+          className="text-3xl font-bold text-primary mb-12"
+        >
+          {t('experience.title')}
+        </motion.h2>
 
-            <motion.div variants={containerVariants} initial="hidden" animate={isInView ? 'visible' : 'hidden'} className="relative">
-              <div
-                className="absolute left-[14px] md:left-[22px] top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 via-blue-600 to-transparent"
-              />
+        <motion.div
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={{ visible: { transition: { staggerChildren: 0.15 } } }}
+          className="relative"
+        >
+          {/* Vertical line */}
+          <div className="absolute left-[7px] top-2 bottom-2 w-px bg-border" aria-hidden="true" />
 
-              <div className="space-y-8 md:space-y-12" role="list" aria-label="Work experience timeline">
-                {isLoading ? (
-                  <>
-                    <Skeleton height={250} />
-                    <Skeleton height={250} />
-                  </>
-                ) : (
-                  experiences.map((exp, index) => {
-                    const start = parseDate(exp.start)
-                    const end = parseDate(exp.end)
-                    const periodText = formatPeriod(start, end)
-                    const durationText = computeDuration(start, end)
+          <div className="space-y-10">
+            {experiences.map((exp, index) => {
+              const start = parseDate(exp.start)
+              const end = parseDate(exp.end)
+              const periodText = formatPeriod(start, end)
+              const durationText = computeDuration(start, end)
 
-                    return (
-                      <div key={index} className="relative flex gap-4 md:gap-8" role="listitem">
-                        <div className="flex items-start justify-center pt-2 shrink-0 w-7 md:w-11">
-                          <span className="block w-3 h-3 md:w-4 md:h-4 bg-white rounded-full border-2 md:border-4 border-blue-500 shadow-lg shadow-blue-500/50 relative z-10" />
+              return (
+                <motion.div key={index} variants={fadeInUp} className="relative flex gap-6">
+                  {/* Timeline dot */}
+                  <div className="flex-shrink-0 mt-2 relative z-10">
+                    <div className={`w-3.5 h-3.5 rounded-full border-2 ${exp.current ? 'bg-accent border-accent' : 'bg-border border-border'}`} />
+                  </div>
+
+                  {/* Content card */}
+                  <div className="flex-1 pb-2">
+                    <div className="p-6 border border-border rounded-xl bg-surface">
+                      <div className="mb-3">
+                        <h3 className="text-lg font-semibold text-primary">{exp.role}</h3>
+                        <div className="flex items-center gap-2 mt-1 flex-wrap">
+                          <span className="text-accent font-medium text-sm">{exp.company}</span>
+                          <span className="text-border">·</span>
+                          <span className="text-muted text-sm">{exp.type}</span>
                         </div>
-
-                        <motion.div
-                          variants={itemVariants}
-                          whileHover={{ scale: 1.02, x: 10 }}
-                          transition={{ type: 'spring', stiffness: 300 }}
-                          className="flex-1 bg-white/10 backdrop-blur-lg rounded-2xl p-6 md:p-8 border border-white/10 hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300"
-                        >
-                          {exp.current && (
-                            <motion.div initial={{ scale: 0 }} animate={isInView ? { scale: 1 } : {}} transition={{ delay: 0.5 + index * 0.2 }} className="absolute -top-3 -right-3 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full" role="status" aria-label="Current position">
-                              {t('experience.current')}
-                            </motion.div>
-                          )}
-
-                          <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
-                            <div>
-                              <h3 className="text-2xl font-bold text-white mb-1">{exp.role}</h3>
-                              <div className="flex items-center gap-2 text-blue-400 font-semibold mb-2">
-                                <span>{exp.company}</span>
-                                <span className="text-white/40">·</span>
-                                <span className="text-white/60 text-sm">{exp.type}</span>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="flex flex-wrap gap-2 text-white/60 text-sm mb-4" aria-label="Employment details">
-                            <span className="flex items-center gap-1">
-                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                              </svg>
-                              {periodText}
-                            </span>
-                            <span className="text-white/40">·</span>
-                            <span>{durationText}</span>
-                            <span className="text-white/40">·</span>
-                            <span className="flex items-center gap-1">
-                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                              </svg>
-                              {exp.location}
-                            </span>
-                          </div>
-
-                          <p className="text-white/80 leading-relaxed mb-4">{exp.description}</p>
-
-                          <div className="flex flex-wrap gap-2" role="list" aria-label="Skills used in this role">
-                            {exp.skills.map((skill, idx) => (
-                              <motion.span key={idx} whileHover={{ scale: 1.1 }} className="px-3 py-1 bg-blue-600/30 text-blue-200 rounded-lg text-xs font-medium border border-blue-500/30" role="listitem">
-                                {skill}
-                              </motion.span>
-                            ))}
-                          </div>
-                        </motion.div>
                       </div>
-                    )
-                  })
-                )}
-              </div>
-            </motion.div>
 
-          </motion.div>
-        </div>
+                      <div className="flex flex-wrap gap-2 text-muted text-sm mb-4">
+                        <span>{periodText}</span>
+                        <span className="text-border">·</span>
+                        <span>{durationText}</span>
+                        <span className="text-border">·</span>
+                        <span>{exp.location}</span>
+                      </div>
+
+                      <ul className="space-y-2 mb-4">
+                        {exp.bullets.map((bullet, i) => (
+                          <li key={i} className="text-secondary text-sm leading-relaxed flex gap-2">
+                            <span className="text-border mt-1.5 flex-shrink-0">
+                              <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 8 8"><circle cx="4" cy="4" r="2" /></svg>
+                            </span>
+                            <span>{bullet}</span>
+                          </li>
+                        ))}
+                      </ul>
+
+                      <div className="flex flex-wrap gap-1.5">
+                        {exp.skills.map((skill) => (
+                          <span
+                            key={skill}
+                            className="px-2.5 py-1 text-xs text-muted bg-background border border-border rounded-md"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )
+            })}
+          </div>
+        </motion.div>
       </div>
     </section>
   )
