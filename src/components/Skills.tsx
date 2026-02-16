@@ -1,5 +1,5 @@
 import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { useLanguage } from '../contexts/LanguageContext'
 
 type Skill = {
@@ -7,12 +7,22 @@ type Skill = {
   icon: string
 }
 
-const ICON_COLOR = '6B7280'
-
 const Skills = () => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
   const { t } = useLanguage()
+
+  const [isDark, setIsDark] = useState(() => document.documentElement.classList.contains('dark'))
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setIsDark(document.documentElement.classList.contains('dark'))
+    })
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+    return () => observer.disconnect()
+  }, [])
+
+  const iconColor = isDark ? '94A3B8' : '6B7280'
 
   const skillCategories = [
     {
@@ -139,7 +149,7 @@ const Skills = () => {
                 {category.skills.map((skill) => (
                   <div key={skill.name} className="flex items-center gap-2.5 text-sm text-secondary">
                     <img
-                      src={`https://cdn.simpleicons.org/${skill.icon}/${ICON_COLOR}`}
+                      src={`https://cdn.simpleicons.org/${skill.icon}/${iconColor}`}
                       alt=""
                       className="w-5 h-5 flex-shrink-0"
                       loading="lazy"

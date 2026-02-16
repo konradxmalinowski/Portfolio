@@ -2,6 +2,7 @@ import { Suspense, lazy } from 'react'
 import Hero from './components/Hero'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
+import { useLanguage } from './contexts/LanguageContext'
 
 const About = lazy(() => import('./components/About'))
 const Services = lazy(() => import('./components/Services'))
@@ -12,13 +13,15 @@ const Projects = lazy(() => import('./components/Projects'))
 const Contact = lazy(() => import('./components/Contact'))
 
 function App() {
+  const { t } = useLanguage()
+
   return (
     <>
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-accent focus:text-white focus:top-4 focus:left-4 focus:rounded-lg"
       >
-        Skip to main content
+        {t('nav.skip')}
       </a>
 
       <Nav />

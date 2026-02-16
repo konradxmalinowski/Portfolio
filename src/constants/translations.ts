@@ -119,6 +119,18 @@ export const translations = {
         'contact.form.success': "Message sent successfully. I'll get back to you soon.",
         'contact.form.error': 'Failed to send message. Please try again or email me directly.',
         'contact.form.ratelimit': 'Too many messages sent. Please wait before sending another. Limit: 5 per hour.',
+
+        'nav.theme.light': 'Light mode',
+        'nav.theme.dark': 'Dark mode',
+        'nav.menu.open': 'Open menu',
+        'nav.menu.close': 'Close menu',
+        'nav.skip': 'Skip to main content',
+
+        'projects.status.live': 'Live',
+        'projects.status.development': 'In Development',
+        'projects.status.archived': 'Archived',
+        'projects.link.source': 'Source Code',
+        'projects.link.demo': 'Live Demo',
     },
     pl: {
         'nav.about': 'O mnie',
@@ -240,5 +252,17 @@ export const translations = {
         'contact.form.success': 'Wiadomość wysłana pomyślnie. Odezwę się wkrótce.',
         'contact.form.error': 'Nie udało się wysłać wiadomości. Spróbuj ponownie lub napisz bezpośrednio na email.',
         'contact.form.ratelimit': 'Zbyt wiele wiadomości. Poczekaj przed wysłaniem kolejnej. Limit: 5 na godzinę.',
+
+        'nav.theme.light': 'Tryb jasny',
+        'nav.theme.dark': 'Tryb ciemny',
+        'nav.menu.open': 'Otwórz menu',
+        'nav.menu.close': 'Zamknij menu',
+        'nav.skip': 'Przejdź do treści',
+
+        'projects.status.live': 'Live',
+        'projects.status.development': 'W budowie',
+        'projects.status.archived': 'Archiwum',
+        'projects.link.source': 'Kod źródłowy',
+        'projects.link.demo': 'Wersja live',
     }
 }

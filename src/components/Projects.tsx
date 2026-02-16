@@ -55,11 +55,11 @@ const Projects = () => {
   const statusLabel = (status?: string) => {
     switch (status) {
       case 'live':
-        return <span className="text-xs font-medium text-green-600">Live</span>
+        return <span className="text-xs font-medium text-green-600 dark:text-green-400">{t('projects.status.live')}</span>
       case 'development':
-        return <span className="text-xs font-medium text-amber-600">In Development</span>
+        return <span className="text-xs font-medium text-amber-600 dark:text-amber-400">{t('projects.status.development')}</span>
       case 'archived':
-        return <span className="text-xs font-medium text-muted">Archived</span>
+        return <span className="text-xs font-medium text-muted">{t('projects.status.archived')}</span>
       default:
         return null
     }
@@ -124,7 +124,7 @@ const Projects = () => {
                     rel="noopener noreferrer"
                     className="text-accent hover:text-accent-hover hover:underline transition-colors duration-150"
                   >
-                    Source Code
+                    {t('projects.link.source')}
                   </a>
                 )}
                 {project.liveUrl && (
@@ -134,7 +134,7 @@ const Projects = () => {
                     rel="noopener noreferrer"
                     className="text-accent hover:text-accent-hover hover:underline transition-colors duration-150"
                   >
-                    Live Demo
+                    {t('projects.link.demo')}
                   </a>
                 )}
               </div>

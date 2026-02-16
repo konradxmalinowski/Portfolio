@@ -97,7 +97,7 @@ const Contact = () => {
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
           variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
-          className="grid lg:grid-cols-2 gap-10"
+          className="grid lg:grid-cols-2 gap-10 items-start"
         >
           {/* Contact info */}
           <motion.div variants={fadeInUp} className="space-y-6">
@@ -172,7 +172,7 @@ const Contact = () => {
                 id="name"
                 name="user_name"
                 required
-                className="w-full px-4 py-2.5 rounded-lg bg-background text-primary border border-border focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent transition-all text-sm"
+                className="w-full px-4 py-2.5 rounded-lg bg-background text-primary border border-border focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent transition-all text-sm placeholder:text-muted"
                 placeholder={t('contact.form.placeholder.name')}
               />
             </div>
@@ -186,7 +186,7 @@ const Contact = () => {
                 id="email"
                 name="user_email"
                 required
-                className="w-full px-4 py-2.5 rounded-lg bg-background text-primary border border-border focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent transition-all text-sm"
+                className="w-full px-4 py-2.5 rounded-lg bg-background text-primary border border-border focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent transition-all text-sm placeholder:text-muted"
                 placeholder={t('contact.form.placeholder.email')}
               />
             </div>
@@ -200,7 +200,7 @@ const Contact = () => {
                 name="message"
                 required
                 rows={5}
-                className="w-full px-4 py-2.5 rounded-lg bg-background text-primary border border-border focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent transition-all resize-none text-sm"
+                className="w-full px-4 py-2.5 rounded-lg bg-background text-primary border border-border focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent transition-all resize-none text-sm placeholder:text-muted"
                 placeholder={t('contact.form.placeholder.message')}
               />
             </div>
@@ -234,7 +234,7 @@ const Contact = () => {
                 <motion.p
                   initial={{ opacity: 0, y: -5 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="text-sm text-green-600 bg-green-50 border border-green-200 rounded-lg px-4 py-3"
+                  className="text-sm text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-950 border border-green-200 dark:border-green-800 rounded-lg px-4 py-3"
                 >
                   {t('contact.form.success')}
                 </motion.p>
@@ -243,7 +243,7 @@ const Contact = () => {
                 <motion.p
                   initial={{ opacity: 0, y: -5 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-4 py-3"
+                  className="text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950 border border-red-200 dark:border-red-800 rounded-lg px-4 py-3"
                 >
                   {t('contact.form.error')}
                 </motion.p>
@@ -252,7 +252,7 @@ const Contact = () => {
                 <motion.p
                   initial={{ opacity: 0, y: -5 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="text-sm text-amber-600 bg-amber-50 border border-amber-200 rounded-lg px-4 py-3"
+                  className="text-sm text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 rounded-lg px-4 py-3"
                 >
                   {t('contact.form.ratelimit')}
                 </motion.p>
