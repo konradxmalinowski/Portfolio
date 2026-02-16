@@ -5,19 +5,20 @@ export default {
     "./index.html",
     "./src/**/*.{ts,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        background: '#FAFAFA',
-        surface: '#FFFFFF',
-        primary: '#111827',
-        secondary: '#4B5563',
-        muted: '#6B7280',
-        border: '#E5E7EB',
+        background: 'rgb(var(--color-bg) / <alpha-value>)',
+        surface: 'rgb(var(--color-surface) / <alpha-value>)',
+        primary: 'rgb(var(--color-primary) / <alpha-value>)',
+        secondary: 'rgb(var(--color-secondary) / <alpha-value>)',
+        muted: 'rgb(var(--color-muted) / <alpha-value>)',
+        border: 'rgb(var(--color-border) / <alpha-value>)',
         accent: {
-          DEFAULT: '#2563EB',
-          hover: '#1D4ED8',
-          light: '#EFF6FF',
+          DEFAULT: 'rgb(var(--color-accent) / <alpha-value>)',
+          hover: 'rgb(var(--color-accent-hover) / <alpha-value>)',
+          light: 'rgb(var(--color-accent-light) / <alpha-value>)',
         },
       },
       fontFamily: {
