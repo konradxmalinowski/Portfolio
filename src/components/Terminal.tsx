@@ -21,11 +21,13 @@ function loadTheme(): Theme {
 }
 
 const WELCOME = `KonradOS v1.0.0 — Interactive Developer Portfolio
-Type "help" to see available commands. Press Tab to autocomplete.`;
+Type "help" to see available commands. Press Tab to autocomplete.
+Tip: type "theme <name>" to change appearance (dark, light, matrix, dracula, nord).`;
 
 const COMPLETABLE = ['help', 'whoami', 'skills', 'projects', 'experience', 'education', 'awards', 'contact', 'clear', 'get', 'theme'];
 
 const GET_PREFIX = 'get /projects/';
+const THEME_PREFIX = 'theme ';
 
 function computeSuggestion(val: string): string {
   if (!val) return '';
@@ -37,6 +39,13 @@ function computeSuggestion(val: string): string {
     if (!prefix) return repos.length > 0 ? repos[0].name : '';
     const match = repos.find((r) => r.name.toLowerCase().startsWith(prefix.toLowerCase()));
     return match ? match.name.slice(prefix.length) : '';
+  }
+
+  if (val.startsWith(THEME_PREFIX)) {
+    const prefix = val.slice(THEME_PREFIX.length);
+    if (!prefix) return THEMES[0];
+    const match = THEMES.find((t) => t !== prefix && t.startsWith(prefix.toLowerCase()));
+    return match ? match.slice(prefix.length) : '';
   }
 
   if (GET_PREFIX.startsWith(val)) {
