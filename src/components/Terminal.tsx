@@ -15,6 +15,29 @@ Type "help" to see available commands. Press Tab to autocomplete.`;
 
 const COMPLETABLE = ['help', 'whoami', 'skills', 'projects', 'experience', 'education', 'contact', 'clear', 'get'];
 
+const GET_PREFIX = 'get /projects/';
+
+function computeSuggestion(val: string): string {
+  if (!val) return '';
+
+  if (val.startsWith(GET_PREFIX)) {
+    const prefix = val.slice(GET_PREFIX.length);
+    const repos = getCachedRepos();
+    if (!repos) return '';
+    if (!prefix) return repos.length > 0 ? repos[0].name : '';
+    const match = repos.find((r) => r.name.toLowerCase().startsWith(prefix.toLowerCase()));
+    return match ? match.name.slice(prefix.length) : '';
+  }
+
+  if (GET_PREFIX.startsWith(val)) {
+    return GET_PREFIX.slice(val.length);
+  }
+
+  const match = COMPLETABLE.find((c) => c !== val && c.startsWith(val.toLowerCase()));
+  if (!match) return '';
+  return (match === 'get' ? GET_PREFIX : match).slice(val.length);
+}
+
 export function Terminal() {
   const [lines, setLines] = useState<TerminalLine[]>([
     { id: 0, type: 'info', content: WELCOME },
@@ -138,31 +161,13 @@ export function Terminal() {
   }
 
   function handleTab() {
-    const val = input;
-
-    if (val.startsWith('get /projects/')) {
-      const prefix = val.slice('get /projects/'.length);
-      const repos = getCachedRepos();
-      if (!repos) return;
-      const matches = repos.filter((r) =>
-        r.name.toLowerCase().startsWith(prefix.toLowerCase())
-      );
-      if (matches.length === 1) {
-        setInput('get /projects/' + matches[0].name);
-      } else if (matches.length > 1) {
-        addLine('info', matches.map((r) => r.name).join('  '));
-      }
+    const suggestion = computeSuggestion(input);
+    if (suggestion) {
+      setInput(input + suggestion);
       return;
     }
-
-    const matches = val
-      ? COMPLETABLE.filter((c) => c.startsWith(val.toLowerCase()))
-      : [...COMPLETABLE];
-
-    if (matches.length === 1) {
-      setInput(matches[0] === 'get' ? 'get /projects/' : matches[0]);
-    } else if (matches.length > 1) {
-      addLine('info', matches.join('  '));
+    if (!input) {
+      addLine('info', COMPLETABLE.join('  '));
     }
   }
 
@@ -189,6 +194,8 @@ export function Terminal() {
     }
   }
 
+  const suggestion = computeSuggestion(input);
+
   return (
     <div className="terminal" onClick={() => inputRef.current?.focus()}>
       <div className="terminal-header">
@@ -203,19 +210,25 @@ export function Terminal() {
         ))}
         <div className="input-row">
           <span className="prompt">$</span>
-          <input
-            ref={inputRef}
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            autoFocus
-            spellCheck={false}
-            autoComplete="off"
-            autoCorrect="off"
-            autoCapitalize="off"
-            aria-label="Terminal input"
-          />
+          <div className="input-wrapper">
+            <input
+              ref={inputRef}
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              autoFocus
+              spellCheck={false}
+              autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="off"
+              aria-label="Terminal input"
+            />
+            <div className="input-overlay" aria-hidden="true">
+              <span className="input-typed">{input}</span>
+              {suggestion && <span className="input-suggestion">{suggestion}</span>}
+            </div>
+          </div>
         </div>
         <div ref={bottomRef} />
       </div>
