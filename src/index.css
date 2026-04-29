@@ -6,14 +6,120 @@
   padding: 0;
 }
 
+/* ── Theme variables ──────────────────────────────────────── */
+
+:root,
+[data-theme="dark"] {
+  --bg:                #0d0d0d;
+  --terminal-bg:       #1c1c1c;
+  --terminal-border:   #2e2e2e;
+  --header-bg:         #2a2a2a;
+  --header-border:     #3a3a3a;
+  --title-color:       #7a7a7a;
+  --body-color:        #d4d4d4;
+  --scrollbar:         #3a3a3a;
+  --output-bg:         #252525;
+  --output-border:     #4a9eff;
+  --error-color:       #f48771;
+  --error-bg:          #2a1a1a;
+  --info-color:        #7ec8e3;
+  --prompt-color:      #4ec9b0;
+  --input-color:       #9cdcfe;
+  --suggestion-color:  #4a5568;
+  --caret-color:       #4ec9b0;
+}
+
+[data-theme="light"] {
+  --bg:                #f0f0f0;
+  --terminal-bg:       #ffffff;
+  --terminal-border:   #cccccc;
+  --header-bg:         #e4e4e4;
+  --header-border:     #cccccc;
+  --title-color:       #888888;
+  --body-color:        #1a1a1a;
+  --scrollbar:         #bbbbbb;
+  --output-bg:         #f8f8f8;
+  --output-border:     #0078d4;
+  --error-color:       #c62828;
+  --error-bg:          #fdecea;
+  --info-color:        #0277bd;
+  --prompt-color:      #008060;
+  --input-color:       #005f9e;
+  --suggestion-color:  #aaaaaa;
+  --caret-color:       #008060;
+}
+
+[data-theme="matrix"] {
+  --bg:                #000000;
+  --terminal-bg:       #020802;
+  --terminal-border:   #003300;
+  --header-bg:         #0a0f0a;
+  --header-border:     #003300;
+  --title-color:       #006600;
+  --body-color:        #00cc33;
+  --scrollbar:         #003300;
+  --output-bg:         #040d04;
+  --output-border:     #00ff41;
+  --error-color:       #ff4444;
+  --error-bg:          #1a0000;
+  --info-color:        #00ff41;
+  --prompt-color:      #00ff41;
+  --input-color:       #00cc33;
+  --suggestion-color:  #005500;
+  --caret-color:       #00ff41;
+}
+
+[data-theme="dracula"] {
+  --bg:                #1e1e2e;
+  --terminal-bg:       #282a36;
+  --terminal-border:   #44475a;
+  --header-bg:         #21222c;
+  --header-border:     #44475a;
+  --title-color:       #6272a4;
+  --body-color:        #f8f8f2;
+  --scrollbar:         #44475a;
+  --output-bg:         #21222c;
+  --output-border:     #bd93f9;
+  --error-color:       #ff5555;
+  --error-bg:          #2a1a2a;
+  --info-color:        #ff79c6;
+  --prompt-color:      #50fa7b;
+  --input-color:       #8be9fd;
+  --suggestion-color:  #44475a;
+  --caret-color:       #50fa7b;
+}
+
+[data-theme="nord"] {
+  --bg:                #242933;
+  --terminal-bg:       #2e3440;
+  --terminal-border:   #3b4252;
+  --header-bg:         #3b4252;
+  --header-border:     #434c5e;
+  --title-color:       #616e88;
+  --body-color:        #d8dee9;
+  --scrollbar:         #434c5e;
+  --output-bg:         #3b4252;
+  --output-border:     #81a1c1;
+  --error-color:       #bf616a;
+  --error-bg:          #2d2020;
+  --info-color:        #88c0d0;
+  --prompt-color:      #a3be8c;
+  --input-color:       #88c0d0;
+  --suggestion-color:  #4c566a;
+  --caret-color:       #a3be8c;
+}
+
+/* ── Layout ───────────────────────────────────────────────── */
+
 body {
-  background: #0d0d0d;
+  background: var(--bg);
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   padding: 32px 16px;
   font-family: ui-monospace, 'Cascadia Code', 'Fira Code', Consolas, 'Courier New', monospace;
+  transition: background 0.2s;
 }
 
 #root {
@@ -21,10 +127,10 @@ body {
   max-width: 860px;
 }
 
-/* Terminal window */
+/* ── Terminal window ──────────────────────────────────────── */
 
 .terminal {
-  background: #1c1c1c;
+  background: var(--terminal-bg);
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.85);
@@ -32,19 +138,21 @@ body {
   display: flex;
   flex-direction: column;
   cursor: text;
-  border: 1px solid #2e2e2e;
+  border: 1px solid var(--terminal-border);
+  transition: background 0.2s, border-color 0.2s;
 }
 
-/* Title bar */
+/* ── Title bar ────────────────────────────────────────────── */
 
 .terminal-header {
-  background: #2a2a2a;
+  background: var(--header-bg);
   padding: 12px 16px;
   display: flex;
   align-items: center;
   gap: 8px;
-  border-bottom: 1px solid #3a3a3a;
+  border-bottom: 1px solid var(--header-border);
   flex-shrink: 0;
+  transition: background 0.2s, border-color 0.2s;
 }
 
 .dot {
@@ -59,23 +167,24 @@ body {
 .dot-green  { background: #28c840; }
 
 .terminal-title {
-  color: #7a7a7a;
+  color: var(--title-color);
   font-size: 13px;
   margin-left: 8px;
   letter-spacing: 0.02em;
 }
 
-/* Scrollable body */
+/* ── Scrollable body ──────────────────────────────────────── */
 
 .terminal-body {
   flex: 1;
   overflow-y: auto;
   padding: 16px 20px 12px;
-  color: #d4d4d4;
+  color: var(--body-color);
   font-size: 14px;
   line-height: 1.65;
   scrollbar-width: thin;
-  scrollbar-color: #3a3a3a transparent;
+  scrollbar-color: var(--scrollbar) transparent;
+  transition: color 0.2s;
 }
 
 .terminal-body::-webkit-scrollbar {
@@ -83,31 +192,31 @@ body {
 }
 
 .terminal-body::-webkit-scrollbar-thumb {
-  background: #3a3a3a;
+  background: var(--scrollbar);
   border-radius: 3px;
 }
 
-/* Lines */
+/* ── Lines ────────────────────────────────────────────────── */
 
 .line {
   margin-bottom: 2px;
 }
 
 .line-input {
-  color: #9cdcfe;
+  color: var(--input-color);
   display: flex;
   gap: 8px;
 }
 
 .line-input .prompt {
-  color: #4ec9b0;
+  color: var(--prompt-color);
   flex-shrink: 0;
 }
 
 .line-output {
-  color: #d4d4d4;
-  background: #252525;
-  border-left: 3px solid #4a9eff;
+  color: var(--body-color);
+  background: var(--output-bg);
+  border-left: 3px solid var(--output-border);
   padding: 10px 14px;
   border-radius: 0 4px 4px 0;
   margin: 4px 0 12px;
@@ -115,12 +224,13 @@ body {
   overflow-x: auto;
   font-size: 13px;
   line-height: 1.7;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
 
 .line-error {
-  color: #f48771;
-  background: #2a1a1a;
-  border-left: 3px solid #f48771;
+  color: var(--error-color);
+  background: var(--error-bg);
+  border-left: 3px solid var(--error-color);
   padding: 10px 14px;
   border-radius: 0 4px 4px 0;
   margin: 4px 0 12px;
@@ -128,15 +238,16 @@ body {
   overflow-x: auto;
   font-size: 13px;
   line-height: 1.7;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
 
 .line-info {
-  color: #7ec8e3;
+  color: var(--info-color);
   font-style: italic;
   margin-bottom: 4px;
 }
 
-/* Input row */
+/* ── Input row ────────────────────────────────────────────── */
 
 .input-row {
   display: flex;
@@ -147,11 +258,10 @@ body {
 }
 
 .input-row .prompt {
-  color: #4ec9b0;
+  color: var(--prompt-color);
   flex-shrink: 0;
 }
 
-/* Overlay stacking: input (transparent text) sits on top of the suggestion div */
 .input-wrapper {
   flex: 1;
   min-width: 0;
@@ -167,7 +277,7 @@ body {
   border: none;
   outline: none;
   color: transparent;
-  caret-color: #4ec9b0;
+  caret-color: var(--caret-color);
   font: inherit;
   font-size: 14px;
   line-height: 1.65;
@@ -188,11 +298,11 @@ body {
 }
 
 .input-typed {
-  color: #9cdcfe;
+  color: var(--input-color);
 }
 
 .input-suggestion {
-  color: #4a5568;
+  color: var(--suggestion-color);
 }
 
 @media (max-width: 600px) {

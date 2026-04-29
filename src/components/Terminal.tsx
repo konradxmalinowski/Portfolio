@@ -10,10 +10,20 @@ interface TerminalLine {
   content: string;
 }
 
+const THEMES = ['dark', 'light', 'matrix', 'dracula', 'nord'] as const;
+type Theme = typeof THEMES[number];
+
+const STORAGE_KEY = 'konrados-theme';
+
+function loadTheme(): Theme {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  return (THEMES as readonly string[]).includes(saved ?? '') ? (saved as Theme) : 'dark';
+}
+
 const WELCOME = `KonradOS v1.0.0 — Interactive Developer Portfolio
 Type "help" to see available commands. Press Tab to autocomplete.`;
 
-const COMPLETABLE = ['help', 'whoami', 'skills', 'projects', 'experience', 'education', 'awards', 'contact', 'clear', 'get'];
+const COMPLETABLE = ['help', 'whoami', 'skills', 'projects', 'experience', 'education', 'awards', 'contact', 'clear', 'get', 'theme'];
 
 const GET_PREFIX = 'get /projects/';
 
@@ -45,10 +55,16 @@ export function Terminal() {
   const [input, setInput] = useState('');
   const [cmdHistory, setCmdHistory] = useState<string[]>([]);
   const [historyIdx, setHistoryIdx] = useState(-1);
+  const [theme, setTheme] = useState<Theme>(loadTheme);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
   const nextId = useRef(1);
+
+  useEffect(() => {
+    document.body.dataset.theme = theme;
+    localStorage.setItem(STORAGE_KEY, theme);
+  }, [theme]);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -106,6 +122,21 @@ export function Terminal() {
 
     if (cmd === 'awards') {
       addLine('output', JSON.stringify(awards, null, 2));
+      return;
+    }
+
+    if (cmd === 'theme' || cmd.startsWith('theme ')) {
+      const arg = cmd.slice('theme'.length).trim();
+      if (!arg) {
+        addLine('output', JSON.stringify({ available: [...THEMES], current: theme }, null, 2));
+        return;
+      }
+      if ((THEMES as readonly string[]).includes(arg)) {
+        setTheme(arg as Theme);
+        addLine('output', JSON.stringify({ message: `Theme set to "${arg}"`, theme: arg }, null, 2));
+      } else {
+        addLine('error', JSON.stringify({ error: 'Unknown theme', available: [...THEMES] }, null, 2));
+      }
       return;
     }
 

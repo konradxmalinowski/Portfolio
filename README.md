@@ -1,196 +1,92 @@
-# 💻 KonradOS CLI – Interactive Developer Portfolio
-An interactive portfolio built as a Command Line Interface (CLI) that simulates API behavior.  
-Instead of traditional navigation, users interact with the application using commands and receive structured JSON responses.
-## 🧠 Concept
-This project combines two paradigms:
-- **CLI (Command Line Interface)** – user interacts via commands
-- **API Simulation** – responses are structured like real backend responses (JSON)
-The goal is to present not only projects, but also **how I think as a developer**:
-- API design
-- data structures
-- system interaction
----
-## 🚀 Features
-- Terminal-style UI (React + TailwindCSS)
-- Command-based navigation
-- JSON responses for all data
-- GitHub API integration (live project data)
-- Structured developer profile (skills, experience, education)
-- Simulated REST-like endpoints
----
-## 🖥️ Example Usage
-```bash
-> help
-> whoami
-> projects
-> get /projects/galeria
-> experience
-> contact
+# KonradOS CLI — Interactive Developer Portfolio
 
-Example Response
+An interactive portfolio built as a terminal emulator. Instead of clicking through pages, visitors type commands and receive structured JSON responses — the same way a developer talks to an API.
 
+```
+$ whoami
 {
-  "name": "galeria",
-  "description": "Image gallery with navigation and thumbnails",
-  "tech": ["HTML", "CSS", "JavaScript"],
-  "features": ["prev/next navigation", "thumbnails", "responsive design"]
+  "name": "Konrad Malinowski",
+  "role": "Full-Stack Engineer & Technical Consultant",
+  "location": "Zduńska Wola, Poland",
+  ...
 }
+```
 
-⸻
-
-🧩 Available Commands
-
-Command	Description
-help	List all commands
-whoami	Basic developer info
-skills	Technical skills grouped by category
-projects	List all projects (GitHub API)
-get /projects/{name}	Get project details
-experience	Work experience
-education	Education info
-contact	Contact details
-clear	Clear terminal
-
-⸻
-
-🏗️ Tech Stack
-
-Frontend
-
-* React
-* TailwindCSS
-
-Data
-
-* GitHub REST API
-* Static JSON (experience, education)
-
-Concepts
-
-* CLI simulation
-* API design
-* JSON-based communication
-
-⸻
-
-📁 Project Structure
-
-src/
-  components/
-    Terminal.jsx
-    Line.jsx
-  data/
-    commands.js
-    staticData.js
-  services/
-    github.js
-
-⸻
-
-🔗 GitHub API Integration
-
-Data is fetched dynamically from:
-
-https://api.github.com/users/konradxmalinowski/repos
-
-Example:
-
-export const getRepos = async () => {
-  const res = await fetch("https://api.github.com/users/konradxmalinowski/repos")
-  return res.json()
-}
-
-⸻
-
-🎯 Purpose
-
-This project is designed to:
-
-* stand out from traditional portfolios
-* demonstrate backend thinking in a frontend project
-* show understanding of:
-    * REST-like structures
-    * data modeling
-    * user interaction design
-
-⸻
-
-⚠️ Design Principles
-
-* KISS (Keep It Simple)
-* No overengineering
-* Minimal dependencies
-* Clear structure
-* Fast and responsive
-
-⸻
-
-🧪 Future Improvements
-
-* Command autocomplete (TAB)
-* Command history (↑ / ↓)
-* Syntax highlighting
-* Theming (light/dark CLI)
-* Real backend integration (optional)
-
-⸻
-
-🤖 Claude Prompt (for further development)
-
-Use this prompt in Claude to extend or modify the project:
-
-You are a senior software engineer helping improve a React-based CLI portfolio project.
-Project context:
-- React + TailwindCSS
-- CLI-style interface (terminal simulation)
-- Commands return JSON (API-like responses)
-- GitHub API is used for projects
-- No backend (frontend-only)
-- Code should be simple, clean, junior-friendly
-- Follow KISS, DRY, SOLID (only where reasonable)
-- No overengineering
-Your tasks:
-1. Always start with a short implementation plan
-2. Handle edge cases (invalid commands, empty data, API errors)
-3. Keep code readable and simple
-4. Avoid unnecessary abstractions
-5. One function = one responsibility
-6. Validate all inputs
-7. Do not introduce complex state management (no Redux)
-8. Prefer simple patterns over advanced ones
-When implementing features:
-- Show full code (not fragments)
-- Keep naming simple and consistent
-- Use functional components
-- Use basic hooks (useState, useEffect)
-When adding commands:
-- Extend the existing command system
-- Keep command parsing simple
-- Return consistent JSON format
-Example tasks you may receive:
-- "add autocomplete to CLI"
-- "add new command"
-- "improve GitHub API handling"
-- "refactor command parser"
-Always think like a practical developer, not a theoretician.
-
-⸻
-
-👨‍💻 Author
-
-Konrad Malinowski
-Junior Full Stack Developer
-
-* GitHub: https://github.com/konradxmalinowski
-* LinkedIn: (add your link)
-
-⸻
-
-📄 License
-
-This project is for portfolio purposes.
+**Live demo:** _deploy URL here_
 
 ---
-Jeśli chcesz, mogę teraz:
-- dorzucić **README badge + screenshot terminala**
-- albo zrobić Ci **gotowy starter repo (pliki + kod)** żebyś tylko odpalił `npm install` i miał działające MVP 🚀
+
+## Quick start
+
+```bash
+npm install
+npm run dev      # http://localhost:5173
+npm run build    # production build → dist/
+```
+
+**Requirements:** Node 18+
+
+---
+
+## What you can do
+
+Type any command and press Enter. Press Tab to autocomplete. Use ↑ / ↓ to navigate history.
+
+| Command | What it returns |
+|---|---|
+| `help` | All available commands |
+| `whoami` | Developer profile |
+| `skills` | Tech stack grouped by category |
+| `projects` | GitHub repositories (live data) |
+| `get /projects/{name}` | Single project details |
+| `experience` | Work history |
+| `education` | Education |
+| `awards` | Awards & recognitions |
+| `contact` | Contact info |
+| `theme` | List available themes |
+| `theme <name>` | Switch appearance |
+| `clear` | Clear the terminal |
+
+**Themes:** `dark` · `light` · `matrix` · `dracula` · `nord`
+
+---
+
+## Tech stack
+
+| Layer | Technology |
+|---|---|
+| UI framework | React 19 |
+| Language | TypeScript |
+| Bundler | Vite 8 |
+| Styling | Plain CSS with custom properties |
+| Compiler | React Compiler (Babel) |
+| External data | GitHub REST API |
+
+No UI library, no state management library, no CSS framework.
+
+---
+
+## Documentation
+
+| File | Contents |
+|---|---|
+| [docs/COMMANDS.md](docs/COMMANDS.md) | Every command with full sample output |
+| [docs/THEMES.md](docs/THEMES.md) | Theme guide with color palettes |
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | File structure and data flow |
+| [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) | How to add commands, themes, run locally |
+
+---
+
+## Author
+
+**Konrad Malinowski** — Full-Stack Engineer & Technical Consultant
+
+- GitHub: [github.com/konradxmalinowski](https://github.com/konradxmalinowski)
+- LinkedIn: [linkedin.com/in/konradxmalinowski](https://linkedin.com/in/konradxmalinowski)
+- Email: malinowski.konrad45@gmail.com
+
+---
+
+## License
+
+MIT — free to use as a template or inspiration.

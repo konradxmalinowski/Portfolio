@@ -9,4 +9,5 @@ export const COMMANDS = [
   { name: 'awards', description: 'Awards and recognitions' },
   { name: 'contact', description: 'Contact details' },
   { name: 'clear', description: 'Clear terminal' },
+  { name: 'theme', description: 'List available themes or set one: theme <name>' },
 ] as const;
