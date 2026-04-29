@@ -20,11 +20,26 @@ function loadTheme(): Theme {
   return (THEMES as readonly string[]).includes(saved ?? '') ? (saved as Theme) : 'dark';
 }
 
+function levenshtein(a: string, b: string): number {
+  const m = a.length, n = b.length;
+  const dp = Array.from({ length: m + 1 }, (_, i) =>
+    Array.from({ length: n + 1 }, (_, j) => (i === 0 ? j : j === 0 ? i : 0))
+  );
+  for (let i = 1; i <= m; i++) {
+    for (let j = 1; j <= n; j++) {
+      dp[i][j] = a[i - 1] === b[j - 1]
+        ? dp[i - 1][j - 1]
+        : 1 + Math.min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]);
+    }
+  }
+  return dp[m][n];
+}
+
 const WELCOME = `KonradOS v1.0.0 — Interactive Developer Portfolio
 Type "help" to see available commands. Press Tab to autocomplete.
 Tip: type "theme <name>" to change appearance (dark, light, matrix, dracula, nord).`;
 
-const COMPLETABLE = ['help', 'whoami', 'skills', 'projects', 'experience', 'education', 'awards', 'contact', 'clear', 'get', 'theme'];
+const COMPLETABLE = ['help', 'whoami', 'skills', 'projects', 'experience', 'education', 'awards', 'contact', 'clear', 'get', 'theme', 'stats', 'health'];
 
 const GET_PREFIX = 'get /projects/';
 const THEME_PREFIX = 'theme ';
@@ -149,10 +164,62 @@ export function Terminal() {
       return;
     }
 
+    if (cmd === 'stats') {
+      addLine('info', 'Computing stats from GitHub...');
+      try {
+        const fromCache = getCachedRepos() !== null;
+        const t0 = Date.now();
+        const repos = await getRepos();
+        const ms = Date.now() - t0;
+        const langCount: Record<string, number> = {};
+        let totalStars = 0;
+        for (const r of repos) {
+          totalStars += r.stargazers_count;
+          if (r.language) langCount[r.language] = (langCount[r.language] ?? 0) + 1;
+        }
+        const sorted = Object.entries(langCount).sort((a, b) => b[1] - a[1]);
+        const mostUsed = sorted[0]?.[0] ?? 'N/A';
+        addLine('output', JSON.stringify({
+          total_repos: repos.length,
+          most_used_language: mostUsed,
+          total_stars: totalStars,
+          languages: Object.fromEntries(sorted),
+        }, null, 2));
+        addLine('info', `[200 OK] ${ms}ms · source: ${fromCache ? 'cache' : 'github'}`);
+      } catch (err) {
+        const msg = err instanceof Error ? err.message : 'Failed to fetch repositories';
+        addLine('error', JSON.stringify({ error: msg, status: 503 }, null, 2));
+      }
+      return;
+    }
+
+    if (cmd === 'health') {
+      addLine('info', 'Checking system status...');
+      const t0 = Date.now();
+      let githubStatus = 'unreachable';
+      try {
+        const res = await fetch('https://api.github.com');
+        githubStatus = res.ok ? 'reachable' : `error ${res.status}`;
+      } catch {
+        githubStatus = 'unreachable';
+      }
+      const ms = Date.now() - t0;
+      addLine('output', JSON.stringify({
+        status: 'ok',
+        github_api: githubStatus,
+        latency_ms: ms,
+        app_version: '1.0.0',
+      }, null, 2));
+      return;
+    }
+
     if (cmd === 'projects') {
       addLine('info', 'Fetching repositories from GitHub...');
       try {
+        const fromCache = getCachedRepos() !== null;
+        const t0 = Date.now();
         const repos = await getRepos();
+        const ms = Date.now() - t0;
         const formatted = repos.map((r) => ({
           name: r.name,
           description: r.description ?? '',
@@ -161,6 +228,7 @@ export function Terminal() {
           url: r.html_url,
         }));
         addLine('output', JSON.stringify(formatted, null, 2));
+        addLine('info', `[200 OK] ${repos.length} repositories · ${ms}ms · source: ${fromCache ? 'cache' : 'github'}`);
       } catch (err) {
         const msg = err instanceof Error ? err.message : 'Failed to fetch repositories';
         addLine('error', JSON.stringify({ error: msg, status: 503 }, null, 2));
@@ -169,19 +237,25 @@ export function Terminal() {
     }
 
     if (cmd.startsWith('get /projects/')) {
-      const name = cmd.slice('get /projects/'.length).trim();
+      const rest = cmd.slice('get /projects/'.length);
+      const openFlag = rest.includes('--open');
+      const name = rest.replace(/\s*--open\s*/g, '').trim();
       if (!name) {
-        addLine('error', JSON.stringify({ error: 'Bad Request', message: 'Project name is required', usage: 'get /projects/{name}' }, null, 2));
+        addLine('error', JSON.stringify({ error: 'Bad Request', message: 'Project name is required', usage: 'get /projects/{name} [--open]' }, null, 2));
         return;
       }
       addLine('info', `Fetching project "${name}"...`);
       try {
+        const fromCache = getCachedRepos() !== null;
+        const t0 = Date.now();
         const repos = await getRepos();
+        const ms = Date.now() - t0;
         const repo = repos.find((r) => r.name.toLowerCase() === name.toLowerCase());
         if (!repo) {
           addLine('error', JSON.stringify({ error: 'Not Found', message: `Project "${name}" does not exist`, status: 404 }, null, 2));
           return;
         }
+        if (openFlag) window.open(repo.html_url, '_blank');
         addLine('output', JSON.stringify({
           name: repo.name,
           description: repo.description ?? '',
@@ -190,6 +264,7 @@ export function Terminal() {
           topics: repo.topics,
           url: repo.html_url,
         }, null, 2));
+        addLine('info', `[200 OK] ${ms}ms · source: ${fromCache ? 'cache' : 'github'}${openFlag ? ' · opened in browser' : ''}`);
       } catch (err) {
         const msg = err instanceof Error ? err.message : 'Failed to fetch repositories';
         addLine('error', JSON.stringify({ error: msg, status: 503 }, null, 2));
@@ -197,12 +272,24 @@ export function Terminal() {
       return;
     }
 
-    addLine('error', JSON.stringify({
-      error: 'Command not found',
-      command: cmd,
-      hint: 'Type "help" to see available commands',
-      status: 404,
-    }, null, 2));
+    {
+      const firstWord = cmd.split(' ')[0].toLowerCase();
+      const commandNames = COMMANDS.map((c) => c.name.split(' ')[0]);
+      const closest = commandNames.reduce<{ name: string; dist: number }>(
+        (best, name) => {
+          const d = levenshtein(firstWord, name);
+          return d < best.dist ? { name, dist: d } : best;
+        },
+        { name: '', dist: Infinity }
+      );
+      const suggestion = closest.dist <= 2 ? closest.name : null;
+      addLine('error', JSON.stringify({
+        error: 'Command not found',
+        command: cmd,
+        hint: suggestion ? `did you mean: "${suggestion}"?` : 'Type "help" to see available commands',
+        status: 404,
+      }, null, 2));
+    }
   }
 
   function handleTab() {

@@ -59,7 +59,24 @@ export const experience = [
   },
 ];
 
-export const education: never[] = [];
+export const education = [
+  {
+    degree: 'Technik Programista',
+    school: 'Zespół Szkół Elektronicznych w Zduńskiej Woli',
+    period: 'Sep 2023 – Apr 2028',
+    location: 'Zduńska Wola, Poland',
+    qualifications: ['INF.03', 'INF.04'],
+    description: [
+      'Designing, creating, and administering websites and databases (INF.03).',
+      'Programming, designing, and testing applications (INF.04).',
+      'Building web applications using HTML, CSS, JavaScript, and backend technologies.',
+      'Designing and managing relational databases.',
+      'Fundamentals of application security and code optimization.',
+      'Teamwork and project-based learning in IT projects.',
+    ],
+    skills: ['HTML', 'CSS', 'JavaScript', 'SQL', 'MySQL', 'PHP', 'Python'],
+  },
+];
 
 export const contact = {
   email: 'malinowski.konrad45@gmail.com',

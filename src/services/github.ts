@@ -8,17 +8,20 @@ export interface GitHubRepo {
   fork: boolean;
 }
 
+const TTL_MS = 60_000;
 let cache: GitHubRepo[] | null = null;
+let cacheTime = 0;
 
 export const getCachedRepos = (): GitHubRepo[] | null => cache;
 
 export const getRepos = async (): Promise<GitHubRepo[]> => {
-  if (cache) return cache;
+  if (cache && Date.now() - cacheTime < TTL_MS) return cache;
   const res = await fetch(
     'https://api.github.com/users/konradxmalinowski/repos?per_page=100&sort=updated'
   );
   if (!res.ok) throw new Error(`GitHub API error: ${res.status} ${res.statusText}`);
   const all: GitHubRepo[] = await res.json();
   cache = all.filter((r) => !r.fork);
+  cacheTime = Date.now();
   return cache;
 };
