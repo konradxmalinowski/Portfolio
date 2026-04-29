@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, type KeyboardEvent } from 'react';
 import { Line, type LineType } from './Line';
 import { COMMANDS } from '../data/commands';
-import { whoami, skills, experience, education, contact } from '../data/staticData';
+import { whoami, skills, experience, education, contact, awards } from '../data/staticData';
 import { getRepos, getCachedRepos } from '../services/github';
 
 interface TerminalLine {
@@ -13,7 +13,7 @@ interface TerminalLine {
 const WELCOME = `KonradOS v1.0.0 — Interactive Developer Portfolio
 Type "help" to see available commands. Press Tab to autocomplete.`;
 
-const COMPLETABLE = ['help', 'whoami', 'skills', 'projects', 'experience', 'education', 'contact', 'clear', 'get'];
+const COMPLETABLE = ['help', 'whoami', 'skills', 'projects', 'experience', 'education', 'awards', 'contact', 'clear', 'get'];
 
 const GET_PREFIX = 'get /projects/';
 
@@ -101,6 +101,11 @@ export function Terminal() {
 
     if (cmd === 'contact') {
       addLine('output', JSON.stringify(contact, null, 2));
+      return;
+    }
+
+    if (cmd === 'awards') {
+      addLine('output', JSON.stringify(awards, null, 2));
       return;
     }
 

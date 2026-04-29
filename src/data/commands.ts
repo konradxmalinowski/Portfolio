@@ -6,6 +6,7 @@ export const COMMANDS = [
   { name: 'get /projects/{name}', description: 'Get details of a specific project' },
   { name: 'experience', description: 'Work experience' },
   { name: 'education', description: 'Education info' },
+  { name: 'awards', description: 'Awards and recognitions' },
   { name: 'contact', description: 'Contact details' },
   { name: 'clear', description: 'Clear terminal' },
 ] as const;
