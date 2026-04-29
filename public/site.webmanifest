@@ -1,0 +1,18 @@
+{
+  "name": "KonradOS — Interactive Developer Portfolio",
+  "short_name": "KonradOS",
+  "description": "Interactive CLI portfolio of Konrad Malinowski — Full-Stack Engineer & Technical Consultant.",
+  "start_url": "/Portfolio/",
+  "scope": "/Portfolio/",
+  "display": "standalone",
+  "background_color": "#0d0d0d",
+  "theme_color": "#0d0d0d",
+  "icons": [
+    {
+      "src": "/Portfolio/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
