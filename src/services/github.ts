@@ -10,6 +10,8 @@ export interface GitHubRepo {
 
 let cache: GitHubRepo[] | null = null;
 
+export const getCachedRepos = (): GitHubRepo[] | null => cache;
+
 export const getRepos = async (): Promise<GitHubRepo[]> => {
   if (cache) return cache;
   const res = await fetch(

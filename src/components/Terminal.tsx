@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, type KeyboardEvent } from 'react';
 import { Line, type LineType } from './Line';
 import { COMMANDS } from '../data/commands';
 import { whoami, skills, experience, education, contact } from '../data/staticData';
-import { getRepos } from '../services/github';
+import { getRepos, getCachedRepos } from '../services/github';
 
 interface TerminalLine {
   id: number;
@@ -11,7 +11,9 @@ interface TerminalLine {
 }
 
 const WELCOME = `KonradOS v1.0.0 — Interactive Developer Portfolio
-Type "help" to see available commands.`;
+Type "help" to see available commands. Press Tab to autocomplete.`;
+
+const COMPLETABLE = ['help', 'whoami', 'skills', 'projects', 'experience', 'education', 'contact', 'clear', 'get'];
 
 export function Terminal() {
   const [lines, setLines] = useState<TerminalLine[]>([
@@ -135,8 +137,40 @@ export function Terminal() {
     }, null, 2));
   }
 
+  function handleTab() {
+    const val = input;
+
+    if (val.startsWith('get /projects/')) {
+      const prefix = val.slice('get /projects/'.length);
+      const repos = getCachedRepos();
+      if (!repos) return;
+      const matches = repos.filter((r) =>
+        r.name.toLowerCase().startsWith(prefix.toLowerCase())
+      );
+      if (matches.length === 1) {
+        setInput('get /projects/' + matches[0].name);
+      } else if (matches.length > 1) {
+        addLine('info', matches.map((r) => r.name).join('  '));
+      }
+      return;
+    }
+
+    const matches = val
+      ? COMPLETABLE.filter((c) => c.startsWith(val.toLowerCase()))
+      : [...COMPLETABLE];
+
+    if (matches.length === 1) {
+      setInput(matches[0] === 'get' ? 'get /projects/' : matches[0]);
+    } else if (matches.length > 1) {
+      addLine('info', matches.join('  '));
+    }
+  }
+
   function handleKeyDown(e: KeyboardEvent<HTMLInputElement>) {
-    if (e.key === 'Enter') {
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      handleTab();
+    } else if (e.key === 'Enter') {
       const cmd = input;
       setInput('');
       handleCommand(cmd);
