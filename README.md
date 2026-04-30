@@ -12,7 +12,7 @@ $ whoami
 }
 ```
 
-**Live demo:** _deploy URL here_
+**Live demo:** https://konradxmalinowski.github.io/Portfolio/
 
 ---
 
@@ -22,6 +22,7 @@ $ whoami
 npm install
 npm run dev      # http://localhost:5173
 npm run build    # production build → dist/
+npm run deploy   # build + push to GitHub Pages
 ```
 
 **Requirements:** Node 18+
@@ -39,10 +40,13 @@ Type any command and press Enter. Press Tab to autocomplete. Use ↑ / ↓ to na
 | `skills` | Tech stack grouped by category |
 | `projects` | GitHub repositories (live data) |
 | `get /projects/{name}` | Single project details |
+| `get /projects/{name} --open` | Project details + opens repo in browser |
 | `experience` | Work history |
 | `education` | Education |
 | `awards` | Awards & recognitions |
 | `contact` | Contact info |
+| `stats` | GitHub aggregate stats (repos, languages, stars) |
+| `health` | App and GitHub API status check |
 | `theme` | List available themes |
 | `theme <name>` | Switch appearance |
 | `clear` | Clear the terminal |
@@ -61,6 +65,7 @@ Type any command and press Enter. Press Tab to autocomplete. Use ↑ / ↓ to na
 | Styling | Plain CSS with custom properties |
 | Compiler | React Compiler (Babel) |
 | External data | GitHub REST API |
+| Deploy | GitHub Pages (`gh-pages`) |
 
 No UI library, no state management library, no CSS framework.
 

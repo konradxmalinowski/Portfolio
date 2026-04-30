@@ -7,8 +7,8 @@ This document explains how to run the project locally and how to extend it — a
 ## Running locally
 
 ```bash
-git clone https://github.com/konradxmalinowski/portfolio
-cd portfolio
+git clone https://github.com/konradxmalinowski/Portfolio
+cd Portfolio
 npm install
 npm run dev      # starts Vite dev server at http://localhost:5173
 ```
@@ -19,6 +19,7 @@ Other scripts:
 npm run build    # type-check + production build → dist/
 npm run preview  # serve the dist/ build locally
 npm run lint     # ESLint
+npm run deploy   # build + push dist/ to gh-pages branch
 ```
 
 **Requirements:** Node 18 or later.
@@ -64,7 +65,7 @@ Use `addLine(type, content)` where `type` is one of:
 
 | Type | Appearance |
 |---|---|
-| `'output'` | Grey block with coloured left border — for successful JSON responses |
+| `'output'` | Coloured block with syntax-highlighted JSON |
 | `'error'` | Red block — for error responses |
 | `'info'` | Italic line — for status messages (e.g. "Fetching…") |
 | `'input'` | Echoed command — added automatically before your handler runs |
@@ -89,6 +90,9 @@ export const education = [
     school: 'Example University',
     period: '2022 – 2026',
     location: 'Warsaw, Poland',
+    qualifications: [],
+    description: [],
+    skills: [],
   },
 ];
 ```
@@ -113,7 +117,8 @@ export const awards = [
 
 ### 1. Define CSS variables
 
-Open `src/index.css` and add a new `[data-theme="..."]` block after the existing themes:
+Open `src/index.css` and add a new `[data-theme="..."]` block after the existing themes.  
+Every variable must be present — there is no fallback chain between themes.
 
 ```css
 [data-theme="solarized"] {
@@ -134,10 +139,12 @@ Open `src/index.css` and add a new `[data-theme="..."]` block after the existing
   --input-color:       #268bd2;
   --suggestion-color:  #586e75;
   --caret-color:       #859900;
+  --hl-key:            #268bd2;
+  --hl-str:            #2aa198;
+  --hl-num:            #d33682;
+  --hl-lit:            #859900;
 }
 ```
-
-Every variable must be present — there is no fallback chain between themes.
 
 ### 2. Register the theme name
 
